@@ -1,0 +1,35 @@
+name: pet_services_aggregator
+description: A Flutter UI app that aggregates pet services like grooming, veterinary clinics, and boarding centers.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    # This will include all files in the images folder
+
+  #fonts:
+  # - family: Roboto
+  #   fonts:
+  #     - asset: fonts/Roboto-Regular.ttf
+  #     - asset: fonts/Roboto-Medium.ttf
+  #       weight: 500
+  #     - asset: fonts/Roboto-Bold.ttf
+  #       weight: 700
