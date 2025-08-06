@@ -4,26 +4,26 @@ A Flutter UI application that aggregates pet services like grooming, veterinary 
 
 ## Features
 
-### 🏠 Home Screen
+###  Home Screen
 - Clean, modern interface with search functionality
 - Horizontal scrollable service categories (Grooming, Veterinary, Boarding, Daycare, Training)
 - Featured pet centers with ratings and quick booking options
 - Location-based real pet services from Bangalore
 
-### 📋 Service Listing Screen
+###  Service Listing Screen
 - Filtered list of pet service providers by category
 - Service cards showing images, names, ratings, availability status
 - Pet types supported for each service
 - Advanced filtering and sorting options
 
-### 🏥 Pet Center Detail Screen
+###  Pet Center Detail Screen
 - Detailed service information with SliverAppBar for smooth scrolling
 - Contact information and location details
 - Service offerings with pricing
 - Professional staff profiles with ratings
 - Booking appointment functionality (UI demo)
 
-### 🔧 Additional Features
+###  Additional Features
 - Filter modal with sorting options (Rating, Reviews, Name)
 - Open/Closed status filtering
 - Responsive design with smooth animations
@@ -97,7 +97,7 @@ The app uses real pet service data from Bangalore, including:
 
 ```
 lib/
-├── main.dart                    # App entry point
+├── main.dart                   
 ├── models/
 │   └── pet_service.dart        # Data models
 ├── data/
