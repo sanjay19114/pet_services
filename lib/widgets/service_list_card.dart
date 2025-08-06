@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_services_aggregator/screens/pet_center_detail_screen.dart.dart';
-import '../models/pet_service.dart';
+import '../models/pet.dart';
 
 class ServiceListCard extends StatelessWidget {
   final PetService service;
@@ -21,9 +22,16 @@ class ServiceListCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 10,
-            offset: Offset(0, 2),
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+            spreadRadius: 0,
+          ),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 4,
+            offset: const Offset(0, 1),
+            spreadRadius: 0,
           ),
         ],
       ),
@@ -40,22 +48,22 @@ class ServiceListCard extends StatelessWidget {
             );
           },
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     _buildServiceImage(),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: _buildServiceHeader(),
                     ),
                   ],
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 _buildServiceDetails(),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 _buildPetTypesAndStatus(),
               ],
             ),
@@ -65,28 +73,65 @@ class ServiceListCard extends StatelessWidget {
     );
   }
 
-  Widget _buildServiceImage() {
-    return Container(
-      width: 60,
-      height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            _getServiceColor().withOpacity(0.8),
-            _getServiceColor(),
-          ],
-        ),
+Widget _buildServiceImage() {
+  return Container(
+    width: 60,
+    height: 60,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(12),
+      color: _getServiceColor().withValues(alpha: 0.1),
+    ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Stack(
+        children: [
+          Image.asset(
+            service.imageAsset,
+            width: 60,
+            height: 60,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      _getServiceColor().withValues(alpha: 0.8),
+                      _getServiceColor(),
+                    ],
+                  ),
+                ),
+                child: Icon(
+                  _getServiceIcon(),
+                  color: Colors.white,
+                  size: 28,
+                ),
+              );
+            },
+          ),
+      
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.transparent,
+                  _getServiceColor().withValues(alpha: 0.2),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
-      child: Icon(
-        _getServiceIcon(),
-        color: Colors.white,
-        size: 28,
-      ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildServiceHeader() {
     return Column(
@@ -94,7 +139,7 @@ class ServiceListCard extends StatelessWidget {
       children: [
         Text(
           service.name,
-          style: TextStyle(
+          style: GoogleFonts.inter(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
@@ -102,31 +147,31 @@ class ServiceListCard extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           service.serviceTypeString,
-          style: TextStyle(
+          style: GoogleFonts.inter(
             fontSize: 13,
             color: Colors.grey[600],
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           children: [
-            Icon(Icons.star, color: Colors.amber, size: 16),
-            SizedBox(width: 4),
+            const Icon(Icons.star, color: Colors.amber, size: 16),
+            const SizedBox(width: 4),
             Text(
               '${service.rating}',
-              style: TextStyle(
+              style: GoogleFonts.inter(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(width: 4),
+            const SizedBox(width: 4),
             Text(
               '(${service.reviewCount} reviews)',
-              style: TextStyle(
+              style: GoogleFonts.inter(
                 fontSize: 12,
                 color: Colors.grey[600],
               ),
@@ -143,11 +188,11 @@ class ServiceListCard extends StatelessWidget {
         Row(
           children: [
             Icon(Icons.location_on, color: Colors.grey[500], size: 16),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Expanded(
               child: Text(
                 service.address,
-                style: TextStyle(
+                style: GoogleFonts.inter(
                   fontSize: 13,
                   color: Colors.grey[700],
                 ),
@@ -157,15 +202,15 @@ class ServiceListCard extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           children: [
             Icon(Icons.access_time, color: Colors.grey[500], size: 16),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: service.isOpen ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+              color: service.isOpen ? Colors.green.withValues(alpha: 0.1) : Colors.red.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: service.isOpen ? Colors.green : Colors.red,
@@ -174,7 +219,7 @@ class ServiceListCard extends StatelessWidget {
               ),
               child: Text(
                 service.isOpen ? 'Open Now' : 'Closed',
-                style: TextStyle(
+                style: GoogleFonts.inter(
                   color: service.isOpen ? Colors.green.shade700 : Colors.red.shade700,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -196,17 +241,21 @@ class ServiceListCard extends StatelessWidget {
             runSpacing: 4,
             children: service.petTypesSupported.take(3).map((petType) {
               return Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: _getServiceColor().withOpacity(0.1),
+                  color: _getServiceColor().withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: _getServiceColor().withValues(alpha: 0.3),
+                    width: 1,
+                  ),
                 ),
                 child: Text(
                   petType,
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
                     fontSize: 11,
-                    color: _getServiceColor(),
-                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[700], 
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               );
@@ -214,14 +263,14 @@ class ServiceListCard extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
             color: _getServiceColor(),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(
             'View Details',
-            style: TextStyle(
+            style: GoogleFonts.inter(
               color: Colors.white,
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -235,15 +284,15 @@ class ServiceListCard extends StatelessWidget {
   Color _getServiceColor() {
     switch (service.type) {
       case ServiceType.grooming:
-        return Color(0xFF4A90E2);
+        return const Color(0xFF4A90E2);
       case ServiceType.veterinary:
-        return Color(0xFF50C878);
+        return const Color(0xFF50C878);
       case ServiceType.boarding:
-        return Color(0xFFFF6B6B);
+        return const Color(0xFFFF6B6B);
       case ServiceType.daycare:
-        return Color(0xFFFFD93D);
+        return const Color(0xFFFFD93D);
       case ServiceType.training:
-        return Color(0xFF9B59B6);
+        return const Color(0xFF9B59B6);
     }
   }
 

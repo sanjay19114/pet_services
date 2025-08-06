@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/pet_service.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../models/pet.dart';
 
 class ProfessionalCard extends StatelessWidget {
   final Professional professional;
@@ -12,7 +13,7 @@ class ProfessionalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.grey[50],
         borderRadius: BorderRadius.circular(12),
@@ -24,7 +25,7 @@ class ProfessionalCard extends StatelessWidget {
       child: Row(
         children: [
           _buildProfileImage(),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: _buildProfessionalInfo(),
           ),
@@ -34,28 +35,59 @@ class ProfessionalCard extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileImage() {
-    return Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF4A90E2),
-            Color(0xFF357ABD),
-          ],
+ Widget _buildProfileImage() {
+  return Container(
+    width: 50,
+    height: 50,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(25),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withValues(alpha: 0.1),
+          blurRadius: 4,
+          offset: const Offset(0, 2),
         ),
+      ],
+    ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(25),
+      child: professional.imageAsset.isNotEmpty
+        ? Image.asset(
+            professional.imageAsset,
+            width: 50,
+            height: 50,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return _buildDefaultAvatar();
+            },
+          )
+        : _buildDefaultAvatar(),
+    ),
+  );
+}
+
+Widget _buildDefaultAvatar() {
+  return Container(
+    width: 50,
+    height: 50,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(25),
+      gradient: const LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color(0xFF4A90E2),
+          Color(0xFF357ABD),
+        ],
       ),
-      child: Icon(
-        Icons.person,
-        color: Colors.white,
-        size: 24,
-      ),
-    );
-  }
+    ),
+    child: const Icon(
+      Icons.person,
+      color: Colors.white,
+      size: 24,
+    ),
+  );
+}
 
   Widget _buildProfessionalInfo() {
     return Column(
@@ -63,16 +95,16 @@ class ProfessionalCard extends StatelessWidget {
       children: [
         Text(
           professional.name,
-          style: TextStyle(
+          style: GoogleFonts.inter(
             fontSize: 15,
             fontWeight: FontWeight.w600,
             color: Colors.black87,
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           professional.title,
-          style: TextStyle(
+          style: GoogleFonts.inter(
             fontSize: 13,
             color: Colors.grey[600],
           ),
@@ -83,23 +115,23 @@ class ProfessionalCard extends StatelessWidget {
 
   Widget _buildRating() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.amber.withOpacity(0.1),
+       color: Colors.amber.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
+          const Icon(
             Icons.star,
             color: Colors.amber,
             size: 14,
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Text(
             '${professional.rating}',
-            style: TextStyle(
+            style: GoogleFonts.inter(
               fontSize: 12,
               fontWeight: FontWeight.w600,
               color: Colors.black87,

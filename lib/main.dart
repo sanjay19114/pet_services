@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 
 void main() {
-  runApp(PetServicesApp());
+  runApp(const PetServicesApp());
 }
 
 class PetServicesApp extends StatelessWidget {
+  const PetServicesApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pet Services Aggregator',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        primaryColor: Color(0xFF4A90E2),
+        primaryColor: const Color(0xFF2E7D7D),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Color(0xFF4A90E2),
-          brightness: Brightness.light,
+          seedColor: const Color(0xFF2E7D7D),
+          primary: const Color(0xFF2E7D7D),
         ),
-        fontFamily: 'Roboto',
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF2E7D7D),
+          foregroundColor: Colors.white,
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black87),
         ),
-        scaffoldBackgroundColor: Color(0xFFF8F9FA),
+        useMaterial3: true,
       ),
-      home: HomeScreen(),
-      debugShowCheckedModeBanner: false,
+      home: const HomeScreen(),
     );
   }
 }

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import '../models/pet_service.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_services_aggregator/widgets/featuredcard.dart';
+import '../models/pet.dart';
 import '../data/mock_data.dart';
 import '../widgets/service_category_card.dart';
-import '../widgets/featured_service_card.dart';
 import 'service_listing_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<ServiceCategory> categories = MockData.getServiceCategories();
   List<PetService> featuredServices = MockData.getFeaturedServices();
@@ -18,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F9FA),
+      backgroundColor: const Color(0xFFF8F9FA),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -37,14 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildHeader() {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: Offset(0, 2),
+           color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -58,27 +61,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Theme.of(context).primaryColor,
                 size: 28,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 'PetCare Hub',
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).primaryColor,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.notifications_outlined),
+                icon: const Icon(Icons.notifications_outlined),
                 color: Colors.grey[600],
               ),
             ],
           ),
-          SizedBox(height: 8),
+         
           Text(
-            'Find the best care for your furry friends',
-            style: TextStyle(
+            'Find the best care for your pet',
+            style: GoogleFonts.poppins(
               fontSize: 16,
               color: Colors.grey[600],
             ),
@@ -90,15 +93,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildSearchBar() {
     return Container(
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: Offset(0, 2),
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -106,15 +109,15 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _searchController,
         decoration: InputDecoration(
           hintText: 'Search for grooming, vet, or boarding...',
-          hintStyle: TextStyle(color: Colors.grey[500]),
+          hintStyle: GoogleFonts.poppins(color: Colors.grey[500]),
           prefixIcon: Icon(Icons.search, color: Colors.grey[500]),
           suffixIcon: Icon(Icons.tune, color: Colors.grey[500]),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         ),
+        style: GoogleFonts.poppins(),
         onSubmitted: (value) {
-          // Handle search
-          print('Searching for: $value');
+          debugPrint('Searching for: $value');
         },
       ),
     );
@@ -125,22 +128,22 @@ class _HomeScreenState extends State<HomeScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'Pet Services',
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
         ),
-        SizedBox(height: 16),
-        Container(
+        const SizedBox(height: 16),
+        SizedBox(
           height: 120,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             itemCount: categories.length,
             itemBuilder: (context, index) {
               return ServiceCategoryCard(
@@ -168,26 +171,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 32),
+        const SizedBox(height: 32),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
               Text(
                 'Featured Pet Centers',
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               TextButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ServiceListingScreen(
+                      builder: (context) => const ServiceListingScreen(
                         serviceType: null,
                         categoryName: 'All Services',
                       ),
@@ -196,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: Text(
                   'View All',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600,
                   ),
@@ -205,20 +208,20 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           itemCount: featuredServices.length,
           itemBuilder: (context, index) {
             return FeaturedServiceCard(
               service: featuredServices[index],
-              margin: EdgeInsets.only(bottom: 16),
+              margin: const EdgeInsets.only(bottom: 16),
             );
           },
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }

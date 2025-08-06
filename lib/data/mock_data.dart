@@ -1,4 +1,4 @@
-import '../models/pet_service.dart';
+import '../models/pet.dart';
 import 'package:flutter/material.dart';
 
 class MockData {
@@ -8,38 +8,38 @@ class MockData {
         name: 'Grooming',
         type: ServiceType.grooming,
         icon: Icons.pets,
-        color: Color(0xFF4A90E2),
+        color: const Color(0xFF4A90E2),
       ),
       ServiceCategory(
         name: 'Veterinary',
         type: ServiceType.veterinary,
         icon: Icons.local_hospital,
-        color: Color(0xFF50C878),
+        color: const Color(0xFF50C878),
       ),
       ServiceCategory(
         name: 'Boarding',
         type: ServiceType.boarding,
         icon: Icons.home,
-        color: Color(0xFFFF6B6B),
+        color: const Color(0xFFFF6B6B),
       ),
       ServiceCategory(
         name: 'Daycare',
         type: ServiceType.daycare,
         icon: Icons.schedule,
-        color: Color(0xFFFFD93D),
+        color: const Color(0xFFFFD93D),
       ),
       ServiceCategory(
         name: 'Training',
         type: ServiceType.training,
         icon: Icons.school,
-        color: Color(0xFF9B59B6),
+        color: const Color(0xFF9B59B6),
       ),
     ];
   }
 
   static List<PetService> getPetServices() {
     return [
-      // ===== VETERINARY SERVICES (3) =====
+    
       PetService(
         id: '1',
         name: 'Bangalore Pet Hospital',
@@ -50,7 +50,7 @@ class MockData {
         rating: 4.8,
         reviewCount: 245,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital1.jpg',
         petTypesSupported: ['Dogs', 'Cats', 'Birds', 'Rabbits'],
         description: 'Leading veterinary hospital in Bangalore with 24/7 emergency services and experienced veterinarians.',
         services: [
@@ -63,13 +63,13 @@ class MockData {
           Professional(
             name: 'Dr. Rajesh Kumar',
             title: 'Chief Veterinarian',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor1.jpg',
             rating: 4.9,
           ),
           Professional(
             name: 'Dr. Priya Sharma',
             title: 'Small Animal Specialist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor2.jpg',
             rating: 4.7,
           ),
         ],
@@ -85,7 +85,7 @@ class MockData {
         rating: 4.6,
         reviewCount: 178,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital2.jpg',
         petTypesSupported: ['Dogs', 'Cats', 'Hamsters', 'Guinea Pigs'],
         description: 'Modern veterinary clinic with digital X-ray facilities and specialized exotic pet care.',
         services: [
@@ -98,13 +98,13 @@ class MockData {
           Professional(
             name: 'Dr. Anil Reddy',
             title: 'Senior Veterinarian',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor3.jpg',
             rating: 4.8,
           ),
           Professional(
             name: 'Dr. Meera Nair',
             title: 'Exotic Pet Specialist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor4.jpg',
             rating: 4.5,
           ),
         ],
@@ -120,7 +120,7 @@ class MockData {
         rating: 4.7,
         reviewCount: 203,
         isOpen: false,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital3.jpg',
         petTypesSupported: ['Dogs', 'Cats', 'Birds', 'Reptiles'],
         description: 'Comprehensive veterinary center with advanced surgical facilities and 24/7 ICU care.',
         services: [
@@ -133,19 +133,19 @@ class MockData {
           Professional(
             name: 'Dr. Suresh Babu',
             title: 'Veterinary Surgeon',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor5.jpg',
             rating: 4.9,
           ),
           Professional(
             name: 'Dr. Lakshmi Devi',
             title: 'Emergency Care Specialist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor6.jpg',
             rating: 4.6,
           ),
         ],
       ),
 
-      // ===== GROOMING SERVICES (3) =====
+   
       PetService(
         id: '4',
         name: 'Pawsitive Grooming Studio',
@@ -156,7 +156,7 @@ class MockData {
         rating: 4.6,
         reviewCount: 189,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital15.jpg',
         petTypesSupported: ['Dogs', 'Cats'],
         description: 'Premium pet grooming studio offering full-service grooming with natural and organic products.',
         services: [
@@ -169,13 +169,13 @@ class MockData {
           Professional(
             name: 'Amit Singh',
             title: 'Senior Pet Groomer',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor7.jpg',
             rating: 4.8,
           ),
           Professional(
             name: 'Sneha Patel',
             title: 'Pet Stylist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor8.jpg',
             rating: 4.5,
           ),
         ],
@@ -191,7 +191,7 @@ class MockData {
         rating: 4.4,
         reviewCount: 134,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital4.jpg',
         petTypesSupported: ['Dogs', 'Cats', 'Rabbits'],
         description: 'Full-service pet salon with creative styling and spa treatments for your beloved pets.',
         services: [
@@ -204,13 +204,13 @@ class MockData {
           Professional(
             name: 'Rohit Sharma',
             title: 'Creative Pet Stylist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor9.jpg',
             rating: 4.6,
           ),
           Professional(
             name: 'Pooja Gupta',
             title: 'Pet Spa Specialist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor10.jpg',
             rating: 4.3,
           ),
         ],
@@ -226,7 +226,7 @@ class MockData {
         rating: 4.5,
         reviewCount: 167,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital5.jpg',
         petTypesSupported: ['Dogs', 'Cats'],
         description: 'Affordable and reliable grooming center with experienced groomers and hygienic facilities.',
         services: [
@@ -239,19 +239,19 @@ class MockData {
           Professional(
             name: 'Kiran Kumar',
             title: 'Professional Groomer',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor1.jpg',
             rating: 4.7,
           ),
           Professional(
             name: 'Anjali Rao',
             title: 'Pet Care Specialist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor2.jpg',
             rating: 4.4,
           ),
         ],
       ),
 
-      // ===== BOARDING SERVICES (3) =====
+  
       PetService(
         id: '7',
         name: 'Happy Tails Pet Resort',
@@ -262,7 +262,7 @@ class MockData {
         rating: 4.7,
         reviewCount: 156,
         isOpen: false,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital6.jpg',
         petTypesSupported: ['Dogs', 'Cats', 'Birds'],
         description: 'Luxury pet boarding facility with spacious accommodations, play areas, and 24/7 care.',
         services: [
@@ -275,13 +275,13 @@ class MockData {
           Professional(
             name: 'Arjun Menon',
             title: 'Pet Care Supervisor',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor3.jpg',
             rating: 4.6,
           ),
           Professional(
             name: 'Kavya Reddy',
             title: 'Animal Behaviorist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor4.jpg',
             rating: 4.8,
           ),
         ],
@@ -297,7 +297,7 @@ class MockData {
         rating: 4.5,
         reviewCount: 92,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital7.jpg',
         petTypesSupported: ['Dogs', 'Cats'],
         description: 'Comfortable and secure boarding facility with personalized care and regular updates to pet parents.',
         services: [
@@ -310,13 +310,13 @@ class MockData {
           Professional(
             name: 'Pradeep Singh',
             title: 'Boarding Manager',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor5.jpg',
             rating: 4.4,
           ),
           Professional(
             name: 'Swathi Nair',
             title: 'Pet Caretaker',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor6.jpg',
             rating: 4.6,
           ),
         ],
@@ -332,7 +332,7 @@ class MockData {
         rating: 4.8,
         reviewCount: 211,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital8.jpg',
         petTypesSupported: ['Dogs', 'Cats', 'Birds', 'Rabbits'],
         description: 'Premium boarding facility with climate-controlled rooms, outdoor play areas, and veterinary support.',
         services: [
@@ -345,13 +345,13 @@ class MockData {
           Professional(
             name: 'Rajesh Khanna',
             title: 'Facility Director',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor1.jpg',
             rating: 4.9,
           ),
           Professional(
             name: 'Divya Krishnan',
             title: 'Senior Pet Caretaker',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor4.jpg',
             rating: 4.7,
           ),
         ],
@@ -368,7 +368,7 @@ class MockData {
         rating: 4.4,
         reviewCount: 98,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital9.jpg',
         petTypesSupported: ['Dogs', 'Cats'],
         description: 'Safe and fun daycare environment for pets with supervised play and activities.',
         services: [
@@ -380,7 +380,7 @@ class MockData {
           Professional(
             name: 'Ravi Kumar',
             title: 'Pet Supervisor',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor4.jpg',
             rating: 4.3,
           ),
         ],
@@ -396,7 +396,7 @@ class MockData {
         rating: 4.6,
         reviewCount: 124,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital10.jpg',
         petTypesSupported: ['Dogs'],
         description: 'Specialized dog daycare with breed-specific play groups and professional supervision.',
         services: [
@@ -409,13 +409,13 @@ class MockData {
           Professional(
             name: 'Deepak Joshi',
             title: 'Canine Behaviorist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor2.jpg',
             rating: 4.8,
           ),
           Professional(
             name: 'Nisha Patel',
             title: 'Dog Play Supervisor',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor6.jpg',
             rating: 4.5,
           ),
         ],
@@ -431,7 +431,7 @@ class MockData {
         rating: 4.3,
         reviewCount: 87,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital11.jpg',
         petTypesSupported: ['Dogs', 'Cats', 'Rabbits'],
         description: 'Multi-pet daycare facility with separate areas for different animals and interactive play sessions.',
         services: [
@@ -444,13 +444,13 @@ class MockData {
           Professional(
             name: 'Sanjay Reddy',
             title: 'Daycare Manager',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor2.jpg',
             rating: 4.4,
           ),
           Professional(
             name: 'Preethi Kumari',
             title: 'Pet Activity Coordinator',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor4.jpg',
             rating: 4.2,
           ),
         ],
@@ -466,7 +466,7 @@ class MockData {
         rating: 4.9,
         reviewCount: 67,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital12.jpg',
         petTypesSupported: ['Dogs'],
         description: 'Professional dog training academy with certified trainers and proven methods.',
         services: [
@@ -478,7 +478,7 @@ class MockData {
           Professional(
             name: 'Captain Vikram',
             title: 'Certified Dog Trainer',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor7.jpg',
             rating: 4.9,
           ),
         ],
@@ -494,7 +494,7 @@ class MockData {
         rating: 4.7,
         reviewCount: 143,
         isOpen: true,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital13.jpg',
         petTypesSupported: ['Dogs'],
         description: 'Comprehensive dog training center offering puppy training to advanced behavioral modification.',
         services: [
@@ -507,13 +507,13 @@ class MockData {
           Professional(
             name: 'Dr. Ashwin Kumar',
             title: 'Canine Psychologist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor5pg',
             rating: 4.8,
           ),
           Professional(
             name: 'Meghna Sinha',
             title: 'Professional Dog Trainer',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor8.jpg',
             rating: 4.6,
           ),
         ],
@@ -529,7 +529,7 @@ class MockData {
         rating: 4.5,
         reviewCount: 89,
         isOpen: false,
-        imageAsset: 'assets/images/pet_hospital.jpg',
+        imageAsset: 'assets/hospital_images/hospital14.jpg',
         petTypesSupported: ['Dogs', 'Cats'],
         description: 'Specialized training school for both dogs and cats with positive reinforcement techniques.',
         services: [
@@ -542,13 +542,13 @@ class MockData {
           Professional(
             name: 'Raghav Iyer',
             title: 'Animal Trainer',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor3jpg',
             rating: 4.6,
           ),
           Professional(
             name: 'Sunita Desai',
             title: 'Feline Behavior Specialist',
-            imageAsset: 'assets/images/doctor1.jpg',
+            imageAsset: 'assets/doctor_images/doctor4jpg',
             rating: 4.4,
           ),
         ],

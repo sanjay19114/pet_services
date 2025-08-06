@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FilterModal extends StatefulWidget {
   final String selectedSort;
@@ -13,6 +14,7 @@ class FilterModal extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _FilterModalState createState() => _FilterModalState();
 }
 
@@ -32,7 +34,7 @@ class _FilterModalState extends State<FilterModal> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -49,7 +51,7 @@ class _FilterModalState extends State<FilterModal> {
 
   Widget _buildHeader() {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -62,17 +64,17 @@ class _FilterModalState extends State<FilterModal> {
         children: [
           Text(
             'Filter & Sort',
-            style: TextStyle(
+            style: GoogleFonts.inter(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(20),
@@ -91,12 +93,12 @@ class _FilterModalState extends State<FilterModal> {
 
   Widget _buildContent() {
     return Padding(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildSortSection(),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           _buildAvailabilitySection(),
         ],
       ),
@@ -109,17 +111,17 @@ class _FilterModalState extends State<FilterModal> {
       children: [
         Text(
           'Sort By',
-          style: TextStyle(
+          style: GoogleFonts.inter(
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Colors.black87,
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Column(
           children: sortOptions.map((option) {
             return Container(
-              margin: EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: 8),
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
@@ -130,10 +132,11 @@ class _FilterModalState extends State<FilterModal> {
                     });
                   },
                   child: Container(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: selectedSort == option
-                          ? Theme.of(context).primaryColor.withOpacity(0.1)
+                          
+                          ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
                           : Colors.grey[50],
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
@@ -152,10 +155,10 @@ class _FilterModalState extends State<FilterModal> {
                               : Colors.grey[600],
                           size: 20,
                         ),
-                        SizedBox(width: 12),
+                        const SizedBox(width: 12),
                         Text(
                           option,
-                          style: TextStyle(
+                          style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: selectedSort == option
                                 ? FontWeight.w600
@@ -165,7 +168,7 @@ class _FilterModalState extends State<FilterModal> {
                                 : Colors.black87,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         if (selectedSort == option)
                           Icon(
                             Icons.check_circle,
@@ -190,15 +193,15 @@ class _FilterModalState extends State<FilterModal> {
       children: [
         Text(
           'Availability',
-          style: TextStyle(
+          style: GoogleFonts.inter(
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Colors.black87,
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.grey[50],
             borderRadius: BorderRadius.circular(12),
@@ -214,11 +217,11 @@ class _FilterModalState extends State<FilterModal> {
                 color: Colors.grey[600],
                 size: 20,
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: Text(
                   'Show only open centers',
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
                     fontSize: 14,
                     color: Colors.black87,
                   ),
@@ -242,7 +245,7 @@ class _FilterModalState extends State<FilterModal> {
 
   Widget _buildButtons() {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
@@ -262,7 +265,7 @@ class _FilterModalState extends State<FilterModal> {
                 });
               },
               style: OutlinedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 side: BorderSide(
                   color: Colors.grey[300]!,
                   width: 1,
@@ -273,7 +276,7 @@ class _FilterModalState extends State<FilterModal> {
               ),
               child: Text(
                 'Reset',
-                style: TextStyle(
+                style: GoogleFonts.inter(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Colors.grey[700],
@@ -281,7 +284,7 @@ class _FilterModalState extends State<FilterModal> {
               ),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             flex: 2,
             child: ElevatedButton(
@@ -292,7 +295,7 @@ class _FilterModalState extends State<FilterModal> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,
                 foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -300,7 +303,7 @@ class _FilterModalState extends State<FilterModal> {
               ),
               child: Text(
                 'Apply Filters',
-                style: TextStyle(
+                style: GoogleFonts.inter(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),

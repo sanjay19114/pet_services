@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_services_aggregator/widgets/filter_modal.dart';
-import '../models/pet_service.dart';
+import '../models/pet.dart';
 import '../data/mock_data.dart';
 import '../widgets/service_list_card.dart';
 
@@ -16,10 +17,10 @@ class ServiceListingScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ServiceListingScreenState createState() => _ServiceListingScreenState();
+  ServiceListingScreenState createState() => ServiceListingScreenState();
 }
 
-class _ServiceListingScreenState extends State<ServiceListingScreen> {
+class ServiceListingScreenState extends State<ServiceListingScreen> {
   List<PetService> services = [];
   List<PetService> filteredServices = [];
   String selectedSort = 'Rating';
@@ -83,11 +84,11 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F9FA),
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
         title: Text(
           widget.categoryName,
-          style: TextStyle(
+          style: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
             color: Colors.black87,
           ),
@@ -95,12 +96,12 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black87),
+          icon: const Icon(Icons.arrow_back, color: Colors.black87),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.tune, color: Colors.black87),
+            icon: const Icon(Icons.tune, color: Colors.black87),
             onPressed: _showFilterModal,
           ),
         ],
@@ -118,14 +119,15 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
 
   Widget _buildHeader() {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            offset: Offset(0, 2),
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+            spreadRadius: 0,
           ),
         ],
       ),
@@ -133,16 +135,16 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
         children: [
           Text(
             '${filteredServices.length} services found',
-            style: TextStyle(
+            style: GoogleFonts.inter(
               fontSize: 16,
               color: Colors.grey[600],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withOpacity(0.1),
+              color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
@@ -153,10 +155,10 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
                   size: 16,
                   color: Theme.of(context).primaryColor,
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Text(
                   'Sort by $selectedSort',
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
                     fontSize: 12,
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600,
@@ -181,19 +183,19 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
               size: 64,
               color: Colors.grey[400],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'No services found',
-              style: TextStyle(
+              style: GoogleFonts.inter(
                 fontSize: 18,
                 color: Colors.grey[600],
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Try adjusting your filters',
-              style: TextStyle(
+              style: GoogleFonts.inter(
                 fontSize: 14,
                 color: Colors.grey[500],
               ),
@@ -204,12 +206,12 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
     }
 
     return ListView.builder(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       itemCount: filteredServices.length,
       itemBuilder: (context, index) {
         return ServiceListCard(
           service: filteredServices[index],
-          margin: EdgeInsets.only(bottom: 16),
+          margin: const EdgeInsets.only(bottom: 16),
         );
       },
     );

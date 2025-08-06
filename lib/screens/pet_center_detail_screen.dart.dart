@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import '../models/pet_service.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../models/pet.dart';
 import '../widgets/professional_card.dart';
 
 class PetCenterDetailScreen extends StatelessWidget {
   final PetService service;
 
-  const PetCenterDetailScreen({Key? key, required this.service}) : super(key: key);
+  const PetCenterDetailScreen({Key? key, required this.service})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F9FA),
+      backgroundColor: const Color(0xFFF8F9FA),
       body: CustomScrollView(
         slivers: [
           _buildSliverAppBar(context),
@@ -23,7 +25,7 @@ class PetCenterDetailScreen extends StatelessWidget {
                 _buildServices(context),
                 _buildProfessionals(context),
                 _buildBookingSection(context),
-                SizedBox(height: 100), // Space for floating button
+                const SizedBox(height: 100), 
               ],
             ),
           ),
@@ -34,109 +36,115 @@ class PetCenterDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSliverAppBar(BuildContext context) {
-    return SliverAppBar(
-      expandedHeight: 250,
-      pinned: true,
-      backgroundColor: Colors.white,
-      leading: Container(
-        margin: EdgeInsets.all(8),
+Widget _buildSliverAppBar(BuildContext context) {
+  return SliverAppBar(
+    expandedHeight: 250,
+    pinned: true,
+    backgroundColor: Colors.white,
+    leading: Container(
+      margin: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.9),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.black87),
+        onPressed: () => Navigator.pop(context),
+      ),
+    ),
+    actions: [
+      Container(
+        margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.9),
+          color: Colors.white.withValues(alpha: 0.9),
           borderRadius: BorderRadius.circular(20),
         ),
         child: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black87),
-          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.favorite_border, color: Colors.black87),
+          onPressed: () {},
         ),
       ),
-      actions: [
-        Container(
-          margin: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.9),
-            borderRadius: BorderRadius.circular(20),
+    ],
+    flexibleSpace: FlexibleSpaceBar(
+      background: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(service.imageAsset), 
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withValues(alpha: 0.4), BlendMode.darken),
           ),
-          child: IconButton(
-            icon: Icon(Icons.favorite_border, color: Colors.black87),
-            onPressed: () {},
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Theme.of(context).primaryColor.withValues(alpha: 0.8),
+              Theme.of(context).primaryColor,
+            ],
           ),
         ),
-      ],
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Theme.of(context).primaryColor.withOpacity(0.8),
-                Theme.of(context).primaryColor,
-              ],
-            ),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 10,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Icon(
-                    _getServiceIcon(),
-                    size: 40,
-                    color: Theme.of(context).primaryColor,
-                  ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 16),
-                Text(
-                  service.name,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
+                child: Icon(
+                  _getServiceIcon(),
+                  size: 40,
+                  color: Theme.of(context).primaryColor,
                 ),
-                SizedBox(height: 4),
-                Text(
-                  service.serviceTypeString,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
-                    fontSize: 14,
-                  ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                service.name,
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                service.serviceTypeString,
+                style: GoogleFonts.poppins(
+                  color: Colors.white.withValues(alpha: 0.9),
+                  fontSize: 14,
+                ),
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildBasicInfo(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -151,35 +159,35 @@ class PetCenterDetailScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.star, color: Colors.amber, size: 20),
-                        SizedBox(width: 4),
+                        const Icon(Icons.star, color: Colors.amber, size: 20),
+                        const SizedBox(width: 4),
                         Text(
                           '${service.rating}',
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         Text(
                           '(${service.reviewCount} reviews)',
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: Colors.grey[600],
                             fontSize: 14,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                         color: service.isOpen ? Colors.green : Colors.red,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         service.isOpen ? 'Open Now' : 'Closed',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: Colors.white,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -191,13 +199,13 @@ class PetCenterDetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _buildInfoRow(Icons.location_on, service.address),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           _buildInfoRow(Icons.phone, service.phone),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           _buildInfoRow(Icons.email, service.email),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           _buildPetTypesRow(context),
         ],
       ),
@@ -209,11 +217,11 @@ class PetCenterDetailScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(icon, color: Colors.grey[600], size: 20),
-        SizedBox(width: 12),
+        const SizedBox(width: 12),
         Expanded(
           child: Text(
             text,
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 14,
               color: Colors.grey[700],
             ),
@@ -228,24 +236,33 @@ class PetCenterDetailScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(Icons.pets, color: Colors.grey[600], size: 20),
-        SizedBox(width: 12),
+        const SizedBox(width: 12),
         Expanded(
           child: Wrap(
             spacing: 8,
             runSpacing: 4,
             children: service.petTypesSupported.map((petType) {
+            
+              final serviceColor = _getServiceTypeColor();
+          
+              final textColor = _getContrastColor(serviceColor);
+              
               return Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
+                  color: serviceColor.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: serviceColor.withValues(alpha: 0.4),
+                    width: 1,
+                  ),
                 ),
                 child: Text(
                   petType,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 12,
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w500,
+                    color: textColor,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               );
@@ -256,18 +273,49 @@ class PetCenterDetailScreen extends StatelessWidget {
     );
   }
 
+  Color _getServiceTypeColor() {
+    switch (service.type) {
+      case ServiceType.grooming:
+        return const Color(0xFF4A90E2);
+      case ServiceType.veterinary:
+        return const Color(0xFF50C878);
+      case ServiceType.boarding:
+        return const Color(0xFFFF6B6B);
+      case ServiceType.daycare:
+        return const Color(0xFFFFD93D);
+      case ServiceType.training:
+        return const Color(0xFF9B59B6);
+    }
+  }
+
+  Color _getContrastColor(Color backgroundColor) {
+  
+    switch (service.type) {
+      case ServiceType.daycare: 
+        return Colors.grey[800]!; 
+      case ServiceType.grooming: 
+        return Colors.grey[700]!;
+      case ServiceType.veterinary:
+        return Colors.grey[700]!;
+      case ServiceType.boarding: 
+        return Colors.grey[700]!;
+      case ServiceType.training: 
+        return Colors.grey[700]!;
+    }
+  }
+
   Widget _buildDescription() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -276,16 +324,16 @@ class PetCenterDetailScreen extends StatelessWidget {
         children: [
           Text(
             'About',
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(
             service.description,
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 14,
               color: Colors.grey[700],
               height: 1.5,
@@ -298,16 +346,16 @@ class PetCenterDetailScreen extends StatelessWidget {
 
   Widget _buildServices(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -316,18 +364,18 @@ class PetCenterDetailScreen extends StatelessWidget {
         children: [
           Text(
             'Services & Pricing',
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ListView.separated(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: service.services.length,
-            separatorBuilder: (context, index) => Divider(height: 24),
+            separatorBuilder: (context, index) => const Divider(height: 24),
             itemBuilder: (context, index) {
               final serviceOffering = service.services[index];
               return Row(
@@ -338,16 +386,16 @@ class PetCenterDetailScreen extends StatelessWidget {
                       children: [
                         Text(
                           serviceOffering.name,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Text(
                           serviceOffering.duration,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 12,
                             color: Colors.grey[600],
                           ),
@@ -357,7 +405,7 @@ class PetCenterDetailScreen extends StatelessWidget {
                   ),
                   Text(
                     '₹${serviceOffering.price.toStringAsFixed(0)}',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
@@ -373,19 +421,19 @@ class PetCenterDetailScreen extends StatelessWidget {
   }
 
   Widget _buildProfessionals(BuildContext context) {
-    if (service.professionals.isEmpty) return SizedBox.shrink();
+    if (service.professionals.isEmpty) return const SizedBox.shrink();
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -394,18 +442,18 @@ class PetCenterDetailScreen extends StatelessWidget {
         children: [
           Text(
             'Our Team',
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ListView.separated(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: service.professionals.length,
-            separatorBuilder: (context, index) => SizedBox(height: 16),
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
             itemBuilder: (context, index) {
               return ProfessionalCard(
                 professional: service.professionals[index],
@@ -419,16 +467,16 @@ class PetCenterDetailScreen extends StatelessWidget {
 
   Widget _buildBookingSection(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -437,16 +485,16 @@ class PetCenterDetailScreen extends StatelessWidget {
         children: [
           Text(
             'Book Appointment',
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(
             'Available slots are typically within 2-3 days. Call directly for urgent appointments.',
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 14,
               color: Colors.grey[600],
             ),
@@ -457,6 +505,7 @@ class PetCenterDetailScreen extends StatelessWidget {
   }
 
   Widget _buildBookButton(BuildContext context) {
+    // ignore: sized_box_for_whitespace
     return Container(
       width: MediaQuery.of(context).size.width - 40,
       height: 56,
@@ -468,14 +517,14 @@ class PetCenterDetailScreen extends StatelessWidget {
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Colors.white,
           elevation: 8,
-          shadowColor: Theme.of(context).primaryColor.withOpacity(0.4),
+          shadowColor: Theme.of(context).primaryColor.withValues(alpha: 0.4),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
         ),
         child: Text(
           'Book Appointment',
-          style: TextStyle(
+          style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -494,24 +543,31 @@ class PetCenterDetailScreen extends StatelessWidget {
           ),
           title: Text(
             'Book Appointment',
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
             ),
           ),
           content: Text(
             'This is a UI demo. In a real app, this would open a booking form or redirect to a booking system.',
+            style: GoogleFonts.poppins(),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Cancel'),
+              child: Text(
+                'Cancel',
+                style: GoogleFonts.poppins(),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Booking request sent successfully!'),
+                    content: Text(
+                      'Booking request sent successfully!',
+                      style: GoogleFonts.poppins(),
+                    ),
                     backgroundColor: Colors.green,
                   ),
                 );
@@ -520,7 +576,10 @@ class PetCenterDetailScreen extends StatelessWidget {
                 backgroundColor: Theme.of(context).primaryColor,
                 foregroundColor: Colors.white,
               ),
-              child: Text('Confirm'),
+              child: Text(
+                'Confirm',
+                style: GoogleFonts.poppins(),
+              ),
             ),
           ],
         );

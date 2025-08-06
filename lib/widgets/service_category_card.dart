@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/pet_service.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../models/pet.dart';
 
 class ServiceCategoryCard extends StatelessWidget {
   final ServiceCategory category;
@@ -17,17 +18,17 @@ class ServiceCategoryCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 90,
-        margin: EdgeInsets.symmetric(horizontal: 4),
+        margin: const EdgeInsets.symmetric(horizontal: 4),
         child: Column(
           children: [
             Container(
               width: 70,
               height: 70,
               decoration: BoxDecoration(
-                color: category.color.withOpacity(0.1),
+                color: category.color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: category.color.withOpacity(0.2),
+                  color: category.color.withValues(alpha: 0.2),
                   width: 1,
                 ),
               ),
@@ -37,10 +38,10 @@ class ServiceCategoryCard extends StatelessWidget {
                 size: 32,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               category.name,
-              style: TextStyle(
+              style: GoogleFonts.inter(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,
